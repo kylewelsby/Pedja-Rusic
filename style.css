@@ -40,7 +40,7 @@ body { font:13px/1.231 'Lato' sans-serif; *font-size:small;
 select, input, textarea, button { font:99% sans-serif; }
 pre, code, kbd, samp { font-family: monospace, sans-serif; }
 
-html { overflow-y: hidden; }
+html { overflow: hidden; }
 a:hover, a:active { outline: none; }
 ul, ol { margin-left: 2em; }
 ol { list-style-type: decimal; }
@@ -91,15 +91,26 @@ html{
 	color:white;
 }
 html, header{ 
-	background-color:#4c4c4c;
+	background-color:#414141;
 }
-html.pink, header.pink{ 
+html.black a.black,
+html.pink a.pink,
+html.blue a.blue,
+html.green a.green{
+	box-shadow:0px 0px 10px white;
+	-webkit-box-shadow:0px 0px 10px white;
+	-moz-box-shadow:0px 0px 10px white;
+}
+html.black, header.black, a.black{ 
+	background-color:#414141;
+}
+html.pink, header.pink, a.pink{ 
 	background-color:#ff4872;
 }
-html.blue, header.blue{ 
+html.blue, header.blue, a.blue{ 
 	background-color:#46aff1;
 }
-html.green, header.green{ 
+html.green, header.green, a.green{ 
 	background-color:#58b93b;
 }
 header{ 
@@ -121,10 +132,12 @@ header nav{
 	height:260px; 
 	margin-top:-130px; 
 	background:url('images/logo.png') no-repeat right top; 
-	margin-right:20px;
+	margin-right:20px; 
+	padding-top:35px;
 }
-header nav ul{ 
-	margin-top:35px;
+header nav ul ul a{ 
+	color:rgba(0,0,0,0.7); 
+	text-shadow:rgba(255,254,255,0.02) 0 1px 2px;
 }
 
 header nav ul li{ 
@@ -163,11 +176,21 @@ hr.pocket{
 	border-style:none; 
 	border-width:0;
 }
+h2{ 
+	font-size:2em;
+}
 .colorSchemes{
   position:absolute;
-  top:0;
   right:0;
-  z-index:100;
+  z-index:100; 
+	top:35px;
+}
+.colorSchemes a{ 
+	margin:5px; 
+	display:block; 
+	width:15px; 
+	height:15px; 
+	border:1px solid rgba(255,254,255,0.5);
 }
 #content{ 
 	position:absolute; 
@@ -178,11 +201,42 @@ hr.pocket{
 	overflow-x:auto;
 	bottom:0; 
 	margin-top:-275px;
-	clip:inherit;
+	clip:inherit; 
+	color:white; 
+	white-space:nowrap;
 }
-#wrap{ 
-	width:2000px; 
-	margin-top:150px;
+.wrap{ 
+	display:none;
+	/*min-width:1000px;*/
+	margin-top:146px; 
+	margin-right:100px; 
+	position:absolute;
+}
+.no_js #contact.wrap{
+	display:inline-block;
+}
+#contact.wrap{ 
+	padding-left:35px;
+}
+#contact.wrap ul li{ 
+	padding-top:10px; 
+	padding-bottom:10px; 
+	font-size:1.2em;
+}
+.notice{ 
+	position:absolute; 
+	background-color:white; 
+	top:50%; 
+	margin-top:-135px; 
+	padding:25px 35px; 
+	width:200px; 
+	text-align:justify; 
+	right:0;
+}
+.notice p{ 
+	margin-top:10px; 
+	margin-bottom:10px; 
+	font-size:1.2em;
 }
 article{ 
 	float:left; 
@@ -191,7 +245,8 @@ article{
 	padding-right:25px; 
 	position:relative; 
 	width:300px; 
-	text-align:center;
+	text-align:center; 
+	white-space:nowrap;
 }
 article figcaption{ 
 	position:absolute; 
