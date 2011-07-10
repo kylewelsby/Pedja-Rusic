@@ -12,13 +12,15 @@ function detect_service(url) {
 
 function show_section(element) {
     console.log(element.index());
-    $("#content .wrap:visible:not(#"+element.attr("id")+")").animate({
-        left:"-100%",
-        opacity:0
-    },1000,'swing',function(){
+    $("#content .wrap:visible:not(#" + element.attr("id") + ")").animate({
+        left: "-100%",
+        opacity: 0
+    },
+    1000, 'swing',
+    function() {
         $(this).hide();
         $(this).css({
-            left:"100%"
+            left: "100%"
         });
     });
     element.not(":visible").show().css({
@@ -27,12 +29,35 @@ function show_section(element) {
     }).animate({
         left: 0,
         opacity: 1
-    },1000,'swing',function(){
+    },
+    1000, 'swing',
+    function() {
         // $(this).hide();
-    });
+        });
 }
 
 $(document).ready(function() {
+
+    $("header, .pocket").animate({
+        left:0
+    },1000,'swing',function(){
+        $("nav",this).show().css({
+            opacity:0
+        }).animate({
+            opacity:1
+        },1000,'swing',function(){
+            $(this).show();
+            $(this).find("a").each(function(i,val){
+                var element = $(this);
+                setTimeout(function(){
+                    element.animate({
+                        marginRight:'0px'
+                    });  
+                },i*100);
+            });
+            show_section($("#portfolio"));
+        });
+    });
     (function() {
         var schemes = ["black", "pink", "blue", "green"],
         div = $("<div>", {
@@ -52,10 +77,19 @@ $(document).ready(function() {
                 $("html, header").removeAttr('class').addClass(scheme);
                 return false;
             });
+            link.hide();
             div.append(link);
         });
-
+        
         $("body").append(div);
+        
+        $("body .colorSchemes a").each(function(i,val){
+           var element = $(this);
+           setTimeout(function(){
+               element.fadeIn();
+           },i*100);
+            
+        });
     })();
 
     (function() {
@@ -68,15 +102,21 @@ $(document).ready(function() {
         $("a[href='#iphone']").click(function() {
             show_section($("#portfolio_iphone"));
         });
+        $("a[href='#goodies']").click(function() {
+            show_section($("#goodies"));
+        });
+        $("a[href='#about']").click(function() {
+            show_section($("#about"));
+        });
         $("a[href='#contact']").click(function() {
             show_section($("#contact"));
         });
     })();
 
     (function() {
-        var portfolio = $("<div>",{
+        var portfolio = $("<div>", {
             id: 'portfolio',
-            'class':'wrap'
+            'class': 'wrap'
         }),
         portfolio_mac = $("<div>", {
             id: 'portfolio_mac',
@@ -85,44 +125,58 @@ $(document).ready(function() {
         portfolio_iphone = $("<div>", {
             id: 'portfolio_iphone',
             'class': 'wrap'
+        }),
+        goodies = $("<div>", {
+            id: 'goodies',
+            'class': 'wrap'
         });
         if (window.tumblr_api_read) {
             $.each(tumblr_api_read.posts,
             function() {
-                var element = $("<article>", {
-                    id: "post_" + this.id
-                }),
-                figure = $("<figure>"),
-                figcaption = $("<figcaption>", {
-                    html: this['photo-caption']
-                }),
-                image = $("<img>", {
-                    src: this['photo-url-250']
-                }),
-                photoURL = this['photo-link-url'],
-                a = $("<a>", {
-                    href: photoURL,
-                    'class': detect_service(photoURL).toLowerCase(),
-                    text: detect_service(photoURL)
-                });
-                figure.append(image);
-                figcaption.append(a);
-                figure.append(figcaption);
-                element.append(figure);
-                $.each(this.tags,
-                function(i, value) {
-                    if(value === "portfolio"){
-                        portfolio.append(element);
-                    }else if (value === "mac"){
-                        portfolio_mac.append(element);
-                    }else if (value === "iphone"){
-                        portfolio_iphone.append(element);
+                if(this.type === "photo"){
+                    var element = $("<article>", {
+                        id: "post_" + this.id
+                    }),
+                    figure = $("<figure>"),
+                    figcaption = $("<figcaption>", {
+                        html: this['photo-caption']
+                    }),
+                    image = $("<img>", {
+                        src: this['photo-url-250']
+                    }),
+                    photoURL = this['photo-link-url'],
+                    a = $("<a>", {
+                        href: photoURL,
+                        'class': 'ir ' + detect_service(photoURL).toLowerCase(),
+                        text: detect_service(photoURL)
+                    });
+                    figure.append(image);
+                    if (photoURL) {
+                        figcaption.append(a);
                     }
-                });
+                    figure.append(figcaption);
+                    element.append(figure);
+                    $.each(this.tags,
+                    function(i, value) {
+                        el = element.clone();
+                        if (value === "portfolio") {
+                            portfolio.append(el);
+                        } else if (value === "mac") {
+                            portfolio_mac.append(el);
+                        } else if (value === "iphone") {
+                            portfolio_iphone.append(el);
+                        } else if (value === "goodies"){
+                            goodies.append(el);
+                        }
+                    });
+                }
             });
             $("#content").append(portfolio);
             $("#content").append(portfolio_mac);
             $("#content").append(portfolio_iphone);
+            $("#content").append(goodies);
+            
+            
         } else {
             (function() {
                 var notice = $("<div>", {
@@ -144,7 +198,7 @@ $(document).ready(function() {
                     right: 0
                 },
                 2000, 'swing');
-                
+
                 show_section($("#contact"));
             })();
         }

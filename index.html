@@ -8,9 +8,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta charset="UTF-8">
   <title>Pedja Rusic</title>
+  <meta name="description" content="{MetaDescription}">
+  <meta name="keywords" content="{block:Tags}{Tag}, {/block:Tags}{Title}">
+  <link rel="shortcut icon" href="{Favicon}">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="{RSS}"/>
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="http://pedjarusic.com.s3.amazonaws.com/css/style.css">
 </head>
 <body>
   <header>
@@ -23,20 +27,27 @@
           </ul>
         </li>
         <li><a href="#about">About</a></li>
-        <li><a href="#free_shit">Free Shit</a></li>
+        <li><a href="#goodies">Free Shit</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
   <hr class="pocket">
   <section id="content">
+    <section id="about" class="wrap">
+      {Description}
+    </section>
     <section id="contact" class="wrap">
       <h2>Contact</h2>
-      <ul>
-        <li><a href="mailto:pedja.rusic@iconblock.com&amp;subject=Hello from your website" rel="nofollow">Mail</a></li>
+      <ul class="clearfix">
+        <li><a href="mailto:pedja.rusic@gmail.com&amp;subject=Hello from your website" rel="nofollow">Mail</a></li>
         <li><a href="http://twitter.com/pedja_r" rel="nofollow">Twitter</a></li>
         <li><a href="http://dribbble.com/PedjaR" rel="nofollow">Dribbble</a></li>
       </ul>
+      <small class="clearfix">
+        <p>Lovingly coded by <a href="http://mekyle.com" rel="friend" title="MΞKYLE">MΞKYLE</a></p>
+        <p class="powered">Powered by <a href="http://tumblr.com" rel="nofollow">Tumblr</a></p>
+      </small>
     </section>
   </section>
   
@@ -47,19 +58,20 @@
       <p>Quick, unplug your computer.</p>
     </div>
   </noscript>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.js"></script>
   
   <!--[if lt IE 7 ]>
-    <script src="js/libs/dd_belatedpng.js"></script>
+    <script src="http://dillerdesign.com/experiment/DD_belatedPNG/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix("img, .png_bg");</script>
   <![endif]-->
   
-  <script src="http://pedja-r.tumblr.com/api/read/json?tagged=portfolio&amp;type=photo"></script>
+  <script src="http://pedja-r.tumblr.com/api/read/json?type=photo"></script>
   
-  <script src="js/pejda.js"></script>
+  <script src="http://pedjarusic.com.s3.amazonaws.com/js/pejda.js"></script>
+  
   
   <script>
-    var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]]; // Change UA-XXXXX-X to be your site's ID 
+    var _gaq=[["_setAccount","UA-24459294-1"],["_trackPageview"]]; // Change UA-XXXXX-X to be your site's ID 
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
     g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
     s.parentNode.insertBefore(g,s)}(document,"script"));
